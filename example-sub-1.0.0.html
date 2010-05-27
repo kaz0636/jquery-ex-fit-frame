@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="./demo.css"/>
+		<style>
+			body{
+				background:#fff;
+				margin:16px;
+			}
+			ul{
+				margin:16px 0;
+				padding:0;
+			}
+			li{
+				margin:0;
+				padding:0;
+				list-style:none;
+			}
+			li a,
+			li a:visited{
+				margin-right:4px;
+				color:#ff5577;
+				text-decoration:none;
+				font-weight:900;
+			}
+		</style>
+		<script type="text/javascript" src="./jquery-1.4.2.min.js"></script>
+		<script>
+			jQuery(function($){
+				$('#add').click(function(){
+					var act = $('#action').val();
+					if(act){
+						$('ul').append('<li><a class="del" href="javascript:void(0)">×</a>' + act + '</li>');
+					}
+				})
+				$('a.del').live('click',function(){
+					$(this).parent().remove();
+				})
+			});
+		</script>
+	</head>
+	<body>
+		<nobr><input id="action"/><button id="add">登録</button></nobr>
+		<ul>
+			<li><a class="del" href="javascript:void(0)">×</a>JavaScript の勉強</li>
+			<li><a class="del" href="javascript:void(0)">×</a>Java の勉強</li>
+			<li><a class="del" href="javascript:void(0)">×</a>Oracle の勉強</li>
+		</ul>
+	</body>
+</html>
