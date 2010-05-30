@@ -1,76 +1,95 @@
 <!DOCTYPE html>
 <html lang="ja">
-	<head>
-		<meta charset="UTF-8">
-		<title>exFitFrame のデモページ</title>
-		<link rel="stylesheet" type="text/css" href="./demo.css"/>
-		<style>
-			h2{
-				margin:16px 0 8px 0;
-			}
-			iframe{
-				width:220px;
-				height:120px;
-			}
-			div.body{
-				overflow:hidden;
-				zoom:1;
-			}
-			div.main{
-				float:right;
-				width:66%;
-				overflow:hidden;
-			}
-			div.sub{
-				float:left;
-				width:31%;
-				overflow:hidden;
-				border-right:solid 1px #e0e0e0;
-			}
-			div.main p{
-				color:#ff5577;
-			}
-		</style>
-		<script type="text/javascript" src="./jquery-1.4.2.min.js"></script>
-		<script type="text/javascript" src="./jquery.exfitframe.0.1.0.js"></script>
-		<script>
-			jQuery(function($){
-				//api オブジェクトの取得
-				var api = $('iframe.sample').exFitFrame({
-					api : true,
-					watchFit : false,
-					load : function(){
-						// iframe 内 document の取得
-						api.getContents()
-							.find('body').click(function(evt){
-								if(evt.target.id == 'add' || $(evt.target).hasClass('del')){
-									api.fit();						
-								}
-							});
-					}
-				});
-			});
-		</script>
-	</head>
-	<body>
-		<div class="header">
-			<h1>exFitFrame のデモページ</h1>
-		</div>
-		<div class="body">
-			<div class="main">
-				<h2>Main Contents</h2>
-				<p>← setInterval 未使用サンプル</p>
-			</div>
-			<div class="sub">
-				<h2>TODO</h2>
-				<iframe class="sample" src="example-sub-1.0.0.html"></iframe>
-				
-				<h2>Sub Contents</h2>
-				<p>contents...</p>
-			</div>
-		</div>
-		<div class="footer">
-			<a class="article" href="http://d.hatena.ne.jp/cyokodog/">Cyokodog::Diary</a>
-		</div>
-	</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>exFitFrame のデモページ</title>
+        <link rel="stylesheet" type="text/css" href="./demo.css"/>
+        <style>
+            h2{
+                margin:16px 0 8px 0;
+            }
+            iframe{
+                width:220px;
+                height:120px;
+            }
+            div.body{
+                overflow:hidden;
+                zoom:1;
+            }
+            div.main{
+                float:right;
+                width:66%;
+                overflow:hidden;
+            }
+            div.sub{
+                float:left;
+                width:31%;
+                overflow:hidden;
+                border-right:solid 1px #e0e0e0;
+            }
+            div.main p{
+                color:#ff5577;
+            }
+        </style>
+        <script type="text/javascript" src="./jquery-1.4.2.min.js"></script>
+        <script type="text/javascript" src="./jquery.exfitframe.0.1.0.js"></script>
+        <script>
+            jQuery(function($){
+
+                //サイズ調整処理
+                var fit = function( api ){
+
+                    //iframe 内の document 取得
+                    var doc = api.getContents();
+                    if( doc ){
+
+                        //登録 or 削除時にサイズ調整
+                        doc.find('body').click(function(evt){
+                            if(evt.target.id == 'add' || $(evt.target).hasClass('del')){
+                                api.fit();                      
+                            }
+                        });
+                        
+                    }
+                }
+
+                //api オブジェクトの取得
+                var api = $('iframe.sample').exFitFrame({
+                    api : true,
+                    watchFit : false,
+                    load : function( api ){
+
+                        //iframe 内ロード時にサイズ調整
+                        fit( api );
+                    }
+                });
+
+                //サイズ調整
+                fit( api );
+
+
+            });
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <h1>exFitFrame のデモページ</h1>
+        </div>
+        <div class="body">
+            <div class="main">
+                <h2>Main Contents</h2>
+                <p>← setInterval 未使用サンプル</p>
+            </div>
+            <div class="sub">
+                <h2>TODO</h2>
+                <iframe class="sample" src="example-sub-1.0.0.html"></iframe>
+                
+                <h2>Sub Contents</h2>
+                <p>contents...</p>
+            </div>
+        </div>
+        <div class="footer">
+            <a class="article" href="http://d.hatena.ne.jp/cyokodog/">Cyokodog::Diary</a>
+        </div>
+    </body>
 </html>
