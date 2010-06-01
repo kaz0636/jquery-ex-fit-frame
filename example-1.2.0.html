@@ -27,46 +27,14 @@
 				overflow:hidden;
 				border-right:solid 1px #e0e0e0;
 			}
-			div.main p{
-				color:#ff5577;
-			}
 		</style>
 		<script type="text/javascript" src="./jquery-1.4.2.min.js"></script>
 		<script type="text/javascript" src="./jquery.exfitframe.0.1.1-min.js"></script>
 		<script>
 			jQuery(function($){
-
-				//サイズ調整処理
-				var fit = function( api ){
-
-					//iframe 内の document 取得
-					var doc = api.getContents();
-					if( doc ){
-
-						//登録 or 削除時にサイズ調整
-						doc.find('body').click(function(evt){
-							if(evt.target.id == 'add' || $(evt.target).hasClass('del')){
-								api.fit();						
-							}
-						});
-						
-					}
-				}
-
-				//api オブジェクトの取得
-				var api = $('iframe.sample').exFitFrame({
-					api : true,
-					watchFit : false,
-					load : function( api ){
-
-						//iframe 内ロード時にサイズ調整
-						fit( api );
-					}
+				$('iframe.sample').exFitFrame({
+					widthFit : false
 				});
-
-				//サイズ調整
-				fit( api );
-
 			});
 		</script>
 	</head>
@@ -77,11 +45,11 @@
 		<div class="body">
 			<div class="main">
 				<h2>Main Contents</h2>
-				<p>← setTimeout 未使用サンプル</p>
+				<p>contents...</p>
 			</div>
 			<div class="sub">
 				<h2>TODO</h2>
-				<iframe class="sample" src="example-sub-1.0.0.html" frameborder="no"></iframe>
+				<iframe class="sample" src="example-sub-1.0.0.html" frameborder="0"></iframe>
 				
 				<h2>Sub Contents</h2>
 				<p>contents...</p>
