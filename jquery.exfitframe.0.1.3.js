@@ -1,5 +1,5 @@
 /*
- * 	exFitFrame 0.1.2 - jQuery plugin
+ * 	exFitFrame 0.1.3 - jQuery plugin
  *	written by Cyokodog	
  *
  *	Copyright (c) 2010 Cyokodog (http://d.hatena.ne.jp/cyokodog/)
@@ -64,7 +64,7 @@
 		_initBox : function( cn , name ){
 			var o = this, c = o.config;
 			var html = cn.find('html');
-			html.css('overflow-' + (name == 'height' ? 'y' : 'y'),'hidden');
+			html.css('overflow-' + (name == 'height' ? 'y' : 'x'),'hidden');
 			html.css('border','none').find('body').css('margin',0);
 			return o;
 		},
@@ -132,6 +132,12 @@
 			var o = this, c = o.config;
 			var cn = o.getContents();
 			return ( !cn || name == 'width' ) ? cn : cn.find('body') ;
+		},
+		getTargets : function(){
+			return this.config.targets;
+		},
+		getTarget : function(){
+			return this.config.target;
 		}
 	});
 	$.ex.fitFrame.defaults = {
